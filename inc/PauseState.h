@@ -2,10 +2,11 @@
 #define __PAUSESTATE__
 
 #include <vector>
+#include "MenuState.h"
 
-class Gameobject;
+class GameObject;
 
-class PauseState : public GameState{
+class PauseState : public MenuState{
 public:
 	virtual void update();
 	virtual void render();
@@ -13,8 +14,8 @@ public:
 	virtual bool onEnter();
 	virtual bool onExit();
 
-	virtual std::string getStateID() const {return m_pauseID;}
-
+	virtual std::string getStateID() const {return s_pauseID;}
+	virtual void setCallbacks(const std::vector<Callback>& callbacks);
 private:
 
 	static void s_pauseToMain();
@@ -22,7 +23,7 @@ private:
 
 	static const std::string s_pauseID;
 
-	std::vector<Gameobject*> m_gameObjects;
+	std::vector<GameObject*> m_gameObjects;
 };
 
 #endif

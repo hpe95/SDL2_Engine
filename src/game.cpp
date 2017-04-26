@@ -2,7 +2,12 @@
 //#include "TextureManager.h"
 #include <stdio.h>
 #include "PlayState.h"
-#include "MenuState.h"
+#include "MainMenuState.h"
+#include "GameObjectFactory.h"
+#include "MenuButtonCreator.h"
+#include "PlayerCreator.h"
+#include "EnemyCreator.h"
+#include "AnimatedGraphic.h"
 
 int i = 0;
 
@@ -35,8 +40,12 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 				//gameObjects.push_back(new Player(new LoaderParams(400, 330, 32, 60, "walk")));
 				//gameObjects.push_back(new Enemy(new LoaderParams(400, 330, 32, 60, "walk")));
 				//InputHandler::Instance()->initialiseJoysticks();
+				GameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
+				GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
+				GameObjectFactory::Instance()->registerType("Enemy", new EnemyCreator());
+				GameObjectFactory::Instance()->registerType("AnimatedGraphic", new AnimatedGraphicCreator());
 				m_pGameStateMachine = new GameStateMachine();
-				m_pGameStateMachine->changeState(new MenuState());
+				m_pGameStateMachine->changeState(new MainMenuState());
 			}
 			else{
 				printf("Render draw failed! %s", SDL_GetError());

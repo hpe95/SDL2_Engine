@@ -1,7 +1,11 @@
 #include "Player.h"
 
-Player::Player(const LoaderParams* pParams) : SDLGameObject(pParams){
-	//m_velocity.setY(-3);
+Player::Player() : SDLGameObject(){
+
+}
+
+void Player::load(const LoaderParams* pParams){
+	SDLGameObject::load(pParams);
 }
 
 void Player::draw(){
@@ -32,8 +36,8 @@ void Player::handleInput(){
 		}
 	}
 
-	Vector2D target = InputHandler::Instance()->getMousePosition();
-	m_velocity = target - m_position;
+	//Vector2D target = InputHandler::Instance()->getMousePosition();
+	//m_velocity = target - m_position;
 	//m_velocity /= 50;
 
 }
@@ -50,7 +54,7 @@ void Player::update(){
 	}
 	
 	if(InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)){
-		m_velocity.setX(10);
+		m_velocity.setY(-2);
 	}
 
 	if(InputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN)){
