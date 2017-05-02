@@ -3,6 +3,7 @@
 
 #include "GameState.h"
 #include "SDLGameObject.h"
+#include "Level.h"
 #include <vector>
 class GameObject;
 
@@ -21,6 +22,7 @@ public:
 private:
 	static const std::string s_playID;
 	std::vector<GameObject*> m_gameObjects;
+	Level* pLevel;
 	bool checkCollision(SDLGameObject *p1, SDLGameObject *p2);
 };
 

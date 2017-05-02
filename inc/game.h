@@ -31,6 +31,14 @@ class Game{
 		SDL_Renderer* getRenderer();
 		bool running();
 		void quit();
+		int getGameWidth() const{
+			return m_gameWidth;
+		}
+
+		int getGameHeight() const{
+			return m_gameHeight;
+		}
+
 		GameStateMachine* getStateMachine();
 	private:
 		
@@ -44,7 +52,8 @@ class Game{
 
 		vector<GameObject*> gameObjects;
 		GameStateMachine* m_pGameStateMachine;
-
+		int m_gameWidth;
+		int m_gameHeight;
 		//GameObject gameObject;
 		//Player player;
 		SDL_Window* mainWindow = 0;

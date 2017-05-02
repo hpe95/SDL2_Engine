@@ -7,12 +7,13 @@
 #include "PauseState.h"
 #include "GameOverState.h"
 #include "StateParser.h"
+#include "LevelParser.h"
 #include <iostream>
 using namespace std;
 
 const string PlayState::s_playID = "PLAY";
 
-bool PlayState::checkCollision(SDLGameObject* p1, SDLGameObject* p2){
+/*bool PlayState::checkCollision(SDLGameObject* p1, SDLGameObject* p2){
 	int leftA, leftB;
 	int rightA, rightB;
 	int topA, topB;
@@ -37,34 +38,39 @@ bool PlayState::checkCollision(SDLGameObject* p1, SDLGameObject* p2){
 	if( leftA >= rightB ){return false ;}
 
 	return true;
-}
+}*/
 
 void PlayState::update(){
 	if(InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
 		Game::Instance()->getStateMachine()->pushState(new PauseState());
 
-	for(int i = 0; i < m_gameObjects.size(); i++)
+	for(unsigned i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->update();
 	}
 
-	if(checkCollision(dynamic_cast<SDLGameObject*> (m_gameObjects[0]), dynamic_cast<SDLGameObject*> (m_gameObjects[1])))
+	/*if(checkCollision(dynamic_cast<SDLGameObject*> (m_gameObjects[0]), dynamic_cast<SDLGameObject*> (m_gameObjects[1])))
 	{
 		Game::Instance()->getStateMachine()->pushState(new GameOverState());
-	}
+	}*/
 }
 
 void PlayState::render(){
-	for(int i = 0; i < m_gameObjects.size(); i++)
+	/*for(unsigned i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->draw();
-	}
+	}*/
+
+	pLevel->render();
 }
 
 bool PlayState::onEnter(){
 	
-	StateParser stateParser;
-	stateParser.parseState("xml/test.xml", s_playID, &m_gameObjects, &m_textureIDList);
+	//StateParser stateParser;
+	//stateParser.parseState("xml/test.xml", s_playID, &m_gameObjects, &m_textureIDList);
+
+	LevelParser levelParser;
+	pLevel = levelParser.parseLevel("xml/map1.tmx");
 
 	//m_callbacks.push_back(0); //pushback 0 callbackID start from 1
 	//m_callbacks.push_back(s_menuToPlay);
@@ -78,14 +84,14 @@ bool PlayState::onEnter(){
 }
 
 bool PlayState::onExit(){
-	for(int i = 0; i < m_gameObjects.size(); i++){
+	/*for(unsigned i = 0; i < m_gameObjects.size(); i++){
 		m_gameObjects[i]->clean();
 	}
 	m_gameObjects.clear();
-	for(int i = 0; i < m_textureIDList.size(); i++)
+	for(unsigned i = 0; i < m_textureIDList.size(); i++)
 	{
 		TextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
-	}
+	}*/
 	cout << "exiting PlayState\n";
 	return true;
 }

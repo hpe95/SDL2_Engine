@@ -13,7 +13,7 @@ OBJECTS       := $(patsubst $(SOURCE_DIR)/%,$(OBJ_DIR)/%,$(SOURCES:.$(SOURCE_EXT
 LIB           := -lSDL2 -lSDL2_image
 INC           := -I $(INCLUDE_DIR)
 CXX           := g++
-CXXFLAGS      := -g -Wall -O3 -std=c++11 
+CXXFLAGS      := -g -Wall -Wno-reorder -O3 -std=c++11 
 RM            := rm -f
 $(TARGET): $(OBJECTS)
 	@mkdir -p $(BIN_DIR)

@@ -36,6 +36,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 			renderer = SDL_CreateRenderer(mainWindow, -1, 0);
 			if(renderer != 0){
 				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+				m_gameWidth = width;
+				m_gameHeight = height;
 				//TextureManager::Instance()->load("src/assets/Walk/HLD.png", "walk", renderer);
 				//gameObjects.push_back(new Player(new LoaderParams(400, 330, 32, 60, "walk")));
 				//gameObjects.push_back(new Enemy(new LoaderParams(400, 330, 32, 60, "walk")));
